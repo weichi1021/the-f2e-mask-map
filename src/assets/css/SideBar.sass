@@ -1,0 +1,53 @@
+@import './_var.sass'
+
+// label
+$colorGroup: ( 'info': $infoColor, 'warning': $warningColor, 'danger': $dangerColor, 'secondary': $secondaryColor )
+@each $name, $color in $colorGroup
+  [name="side-bar"] .mask-label-#{$name}
+    width: 100%
+    padding: 5px
+    text-align: center
+    color: $color
+    border: 1px solid $color
+    border-radius: $borderRadius
+    background-color: rgba($color, 0.1)
+    font-size: 14px
+[name="side-bar"]
+  min-height: 100vh
+  position: fixed
+  width: 0px
+  z-index: 1
+  top: 0
+  left: 0
+  transition: 0.5s
+  overflow-x: hidden
+  background-color: $White
+.today-info
+  padding: 10px 20px
+  .notice-info
+    padding: 3px 5px
+    border-radius: $borderRadius
+    background-color: rgba($White, 0.3)
+.search-box
+  padding: 15px 20px
+  .search-pharmacy
+    position: relative
+    input
+      padding-right: 30px
+    i.fa-search
+      position: absolute
+      right: 10px
+      top: 11px
+      color: $borderColor
+  select + select
+    margin-left: 10px
+.pharmacy-list.list-group
+  overflow-y: scroll
+  height: calc(100vh - 210px)
+  .list-group-item:hover
+    cursor: pointer
+    background-color: darken($White, 2%)
+
+
+
+
