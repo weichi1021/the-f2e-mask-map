@@ -1,25 +1,12 @@
 @import './_var.sass'
 
-// label
-$colorGroup: ( 'info': $infoColor, 'warning': $warningColor, 'danger': $dangerColor, 'secondary': $secondaryColor )
-@each $name, $color in $colorGroup
-  [name="side-bar"] .mask-label-#{$name}
-    width: 100%
-    padding: 5px
-    text-align: center
-    color: $color
-    border: 1px solid $color
-    border-radius: $borderRadius
-    background-color: rgba($color, 0.1)
-    font-size: 14px
 [name="side-bar"]
   min-height: 100vh
   position: fixed
-  width: 0px
   z-index: 1
   top: 0
   left: 0
-  transition: 0.5s
+  transition: .5s
   overflow-x: hidden
   background-color: $White
 .today-info
@@ -46,7 +33,7 @@ $colorGroup: ( 'info': $infoColor, 'warning': $warningColor, 'danger': $dangerCo
   height: calc(100vh - 210px)
   .list-group-item:hover
     cursor: pointer
-    background-color: darken($White, 2%)
+    background-color: darken($White, 3%)
 
 
 

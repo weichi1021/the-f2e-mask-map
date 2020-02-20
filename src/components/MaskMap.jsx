@@ -1,25 +1,20 @@
 import React, { useContext } from 'react'
 import L from 'leaflet';
-import { Map, TileLayer, Marker, Tooltip, Popup } from 'react-leaflet'
+import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 // data
 import { MaskContext } from '../data/Context'
-// css
+// component
+import PharmacyItem from './PharmacyItem'
+// style
 import 'react-leaflet-markercluster/dist/styles.min.css'
 import '../assets/css/MaskMap.sass'
 // image
-import imgMarker from '../assets/images/maker.png'
-
-// display
-const displayPhone = (phone) => {
-  return phone.replace(' ', '')
-}
-const displayCallPhone = (phone) => {
-  return phone.replace(/[^0-9]/ig, '')
-}
+import InfoMarker from '../assets/images/info-maker.png'
+import DangerMarker from '../assets/images/danger-maker.png'
 
 function MaskMap() {
-  const { data, position, zoom } = useContext(MaskContext)
+  const { data, pharmacyId, position, zoom } = useContext(MaskContext)
   const btnSideBarHandler = (e) => {
     const SideBarEl = document.querySelector('[name="side-bar"]')
     const MaskMapEl = document.querySelector('[name="mask-map"]')
@@ -42,9 +37,13 @@ function MaskMap() {
       btnArrowIconEl.classList.remove('fa-angle-double-right');
     }
   }
-  const RedMapMarker = new L.Icon({
-    iconUrl: imgMarker,
-    iconSize: new L.Point(35, 35),
+  const InfoMapMarker = new L.Icon({
+    iconUrl: InfoMarker,
+    iconSize: new L.Point(40, 40),
+  });
+  const DangerMapMarker = new L.Icon({
+    iconUrl: DangerMarker,
+    iconSize: new L.Point(55, 55),
   });
 
   return (
@@ -63,17 +62,14 @@ function MaskMap() {
         <MarkerClusterGroup>
           {
             data.map((item, index) => {
-              const p = item.properties;
-              const position = [item.geometry.coordinates[1], item.geometry.coordinates[0]];
+              const pharmacyPos = [item.geometry.coordinates[1], item.geometry.coordinates[0]];
               return (
                 <Marker
                   key={`position-${index}`}
-                  position={position}
-                  icon={RedMapMarker}>
-                  <Tooltip>
-                    <div className="text-md mb-1">{ p.name }</div>
-                    <div className="text-sm"><a href={`tel:${displayCallPhone(p.phone)}`}>{displayPhone(p.phone)}</a></div>
-                    <div className="text-sm">{p.address}</div>
+                  position={pharmacyPos}
+                  icon={(pharmacyId === item.properties.id)? DangerMapMarker :InfoMapMarker}>
+                  <Tooltip direction="top" offset={[0, -20]} opacity={1}>
+                    <PharmacyItem properties={item.properties} />
                   </Tooltip>
                 </Marker>
               )

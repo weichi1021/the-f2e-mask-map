@@ -1,6 +1,6 @@
 import React from 'react'
 
-// css
+// style
 import '../assets/css/Loading.sass'
 
 const Loading = () => {
@@ -8,7 +8,7 @@ const Loading = () => {
     <div className="loading-page flex-center">
       <div className="text-center">
         <i className="fa fa-spinner fa-spin fa-2x"></i>
-        <div className="text-md mt-1">Loading...</div>
+        <div className="text-md mt-1">初始化</div>
       </div>
     </div>
   )

@@ -30,7 +30,7 @@ const filterMainData = (arr, county, town, searchVal) => {
     // [empty, value, value] => county && town
     // [value, value, empty] => pharmacy && county
     // [value, value, value] => pharmacy && county && town
-    if(!searchVal && !county && !town) return false
+    if(!searchVal && !county && !town) return true
     if(!!searchVal && !county && !town) return samePharmacy
     if(!searchVal && !!county && !town) return sameCounty
     if(!searchVal && !!county && !!town) return sameCounty && sameTown

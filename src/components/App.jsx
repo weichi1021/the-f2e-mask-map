@@ -18,23 +18,24 @@ const defaultState = {
 
 function App() {
   const [mainData, setMainData] = useState([])
+  const [pharmacyId, SetPharmacyId] = useState(null)
   const [position, setPosition] = useState([defaultState.lat, defaultState.lng])
   const [zoom, setZoom] = useState(12)
   const [loading, SetLoading] = useState(true)
+  // mounted
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(GeolocationPosition => {
+      const lat = GeolocationPosition.coords.latitude || defaultState.lat;
+      const lng = GeolocationPosition.coords.longitude || defaultState.lng;
+      setPosition([lat, lng])
+    })
     async function fetch() {
       const res = await getData();
-      // console.log(res)
       setMainData(res)
       // setMainData(TempDate.features)
-      navigator.geolocation.getCurrentPosition(GeolocationPosition => {
-        const lat = GeolocationPosition.coords.latitude || defaultState.lat;
-        const lng = GeolocationPosition.coords.longitude || defaultState.lng;
-        setPosition([lat, lng])
-      })
       setTimeout(()=>{
         SetLoading(false)
-      }, 1000)
+      }, 500)
     }
     fetch()
   }, [])
@@ -43,8 +44,10 @@ function App() {
     <MaskContext.Provider value={
       {
         data: mainData,
+        pharmacyId,
         position,
         zoom,
+        SetPharmacyId: (num)=>SetPharmacyId(num),
         setPosition: (arr)=>setPosition(arr),
         setZoom: (num)=>setZoom(num),
       }
