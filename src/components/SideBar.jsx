@@ -23,20 +23,12 @@ const filterMainData = (arr, county, town, searchVal) => {
     const samePharmacy = (p.name.indexOf(searchVal) !== -1)
     const sameCounty =  (p.county === county)
     const sameTown =  (p.town === town)
-    // [pharmacy, county, town]
-    // [empty, empty, empty] => empty
-    // [value, empty, empty] => pharmacy
-    // [empty, value, empty] => county
-    // [empty, value, value] => county && town
-    // [value, value, empty] => pharmacy && county
-    // [value, value, value] => pharmacy && county && town
-    if(!searchVal && !county && !town) return true
     if(!!searchVal && !county && !town) return samePharmacy
     if(!searchVal && !!county && !town) return sameCounty
     if(!searchVal && !!county && !!town) return sameCounty && sameTown
     if(!!searchVal && !!county && !town) return samePharmacy && sameCounty
     if(!!searchVal && !!county && !!town) return samePharmacy && sameCounty && sameTown
-    return false
+    return true
   })
 }
 
@@ -52,6 +44,7 @@ function SideBar() {
       <SearchBox
         options={filterCountyTownOpt(data)}
         county={county}
+        town={town}
         setCounty={setCounty}
         setTown={setTown}
         setSearchVal={setSearchVal} />

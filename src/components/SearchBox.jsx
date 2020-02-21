@@ -9,7 +9,7 @@ const TownList = (arr, county) => {
   return [...new Set(results)]
 }
 
-function SearchBox({ options, setCounty, setTown, county, setSearchVal }) {
+function SearchBox({ options, setCounty, setTown, county, town, setSearchVal }) {
   const [searchPharmacyVal, setSearchPharmacyVal] = useState('')
   // console.log(options)
   const keyupEnterHandler = (e) => {
@@ -32,22 +32,22 @@ function SearchBox({ options, setCounty, setTown, county, setSearchVal }) {
         <i className="fa fa-search"></i>
       </div>
       <div className="d-flex">
-        <select className="form-control" onChange={CountySelectHandler}>
+        <select className="form-control" value={county} onChange={CountySelectHandler}>
           <option value="">縣市</option>
           {
             CountyList(options).map((item, index) => {
               return (
-                <option key={`county-${index}`}>{item}</option>
+                <option key={`county-${index}`} value={item}>{item}</option>
               )
             })
           }
         </select>
-        <select className="form-control" onChange={e => setTown(e.target.value)}>
+        <select className="form-control" value={town} onChange={e => setTown(e.target.value)}>
           <option value="">鄉鎮市區</option>
           {
             TownList(options, county).map((item, index) => {
               return (
-                <option key={`town-${index}`}>{item}</option>
+                <option key={`town-${index}`} value={item}>{item}</option>
               )
             })
           }

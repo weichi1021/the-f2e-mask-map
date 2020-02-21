@@ -51,7 +51,7 @@ function MaskMap() {
       <Map
         center={position}
         zoom={zoom}
-        maxZoom={45}
+        maxZoom={40}
         viewport={{
           center: position,
           zoom: zoom
@@ -68,7 +68,7 @@ function MaskMap() {
                   key={`position-${index}`}
                   position={pharmacyPos}
                   icon={(pharmacyId === item.properties.id)? DangerMapMarker :InfoMapMarker}>
-                  <Tooltip direction="top" offset={[0, -20]} opacity={1}>
+                  <Tooltip direction="top" offset={[0, -15]} opacity={1}>
                     <PharmacyItem properties={item.properties} />
                   </Tooltip>
                 </Marker>
