@@ -6,14 +6,21 @@ $colorGroup: ( 'info': $infoColor, 'warning': $warningColor, 'danger': $dangerCo
     width: 100%
     padding: 5px
     text-align: center
-    color: $color
-    border: 1px solid $color
+    color: darken($color, 10%)
+    border: 1px solid rgba($color, 0.15)
     border-radius: $borderRadius
     background-color: rgba($color, 0.1)
     font-size: 14px
 
 .pharmacy-item
-  min-width: 220px
+  min-width: 250px
+  >.text-sm
+    white-space: normal
+  i.fa
+    width: 13px
+    margin-right: 5px
+    text-align: center
+    color: rgba($infoColor, 0.8)
 
 [class*="mask-label-"] + [class*="mask-label-"]
   margin-left: 10px

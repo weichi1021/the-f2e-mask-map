@@ -51,7 +51,7 @@ function MaskMap() {
       <Map
         center={position}
         zoom={zoom}
-        maxZoom={40}
+        maxZoom={45}
         viewport={{
           center: position,
           zoom: zoom
